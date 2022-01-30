@@ -43,7 +43,7 @@
     ]
   },
   "devDependencies": {
-    "husky": ">=6",
+    "yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
     "eslint-config-prettier": "^8.3.0",
     "husky": ">=6",
