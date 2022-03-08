@@ -1,10 +1,23 @@
-export const SearchPanel = ({ params, setParams, list }) => {
+import { User } from "./list";
+
+interface IFParams {
+  name: string;
+  personId: string;
+}
+
+interface IFSearchPanel {
+  params: IFParams;
+  setParams: (params: IFParams) => void;
+  list: User[];
+}
+
+export const SearchPanel = ({ params, setParams, list }: IFSearchPanel) => {
   return (
     <form action="">
       <div>
         <input
           type="text"
-          value={params.value}
+          value={params.name}
           onChange={(e) => {
             setParams({
               ...params,
@@ -13,7 +26,7 @@ export const SearchPanel = ({ params, setParams, list }) => {
           }}
         />
         <select
-          value={params.id}
+          value={params.personId}
           onChange={(e) => {
             setParams({
               ...params,
@@ -21,7 +34,7 @@ export const SearchPanel = ({ params, setParams, list }) => {
             });
           }}
         >
-          <option value={''}>负责人</option>
+          <option value={""}>负责人</option>
           {list.map((item) => (
             <option value={item.id} key={item.id}>
               {item.name}
