@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import qs from "qs";
 import { List } from "./list";
 import { SearchPanel } from "./search-panel";

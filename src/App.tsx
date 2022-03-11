@@ -1,12 +1,12 @@
-import React from "react";
 import { ProjectList } from "../src/screens/project-list";
-import logo from "./logo.svg";
+import { TextUseArray } from "../src/text/try-use-array";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <ProjectList />
+      {/* <ProjectList /> */}
+      <TextUseArray />
     </div>
   );
 }
