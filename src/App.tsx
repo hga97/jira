@@ -1,12 +1,13 @@
-import { ProjectList } from "../src/screens/project-list";
-import { TextUseArray } from "../src/text/try-use-array";
+import { ProjectList } from "./screens/project-list";
+import { TextUseArray } from "./text/try-use-array";
+import { Login } from "./screens/login";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
       {/* <ProjectList /> */}
-      <TextUseArray />
+      <Login />
     </div>
   );
 }
