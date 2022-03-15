@@ -9,6 +9,7 @@ interface IFProject {
 export interface User {
   id: number;
   name: string;
+  token: string;
 }
 
 interface IFList {
