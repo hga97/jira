@@ -1,14 +1,12 @@
-import { ProjectList } from "./screens/project-list";
-import { TextUseArray } from "./text/try-use-array";
-import { Login } from "./screens/login";
 import "./App.css";
+import { Authenticated } from "./authenticated-app";
+import { UnAuthenticated } from "unauthenticated-app";
+import { useAuth } from "content/auth-context";
 
 function App() {
+  const { user } = useAuth();
   return (
-    <div className="App">
-      {/* <ProjectList /> */}
-      <Login />
-    </div>
+    <div className="App">{user ? <Authenticated /> : <UnAuthenticated />}</div>
   );
 }
 

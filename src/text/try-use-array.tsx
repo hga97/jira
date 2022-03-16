@@ -1,4 +1,4 @@
-import { useArray } from "../utils/index";
+import { useArray } from "utils/index";
 
 interface Person {
   name: string;

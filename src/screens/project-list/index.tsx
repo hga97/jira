@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import qs from "qs";
 import { List } from "./list";
 import { SearchPanel } from "./search-panel";
-import { cleanObject, useMount, useDebounce } from "../../utils/index";
+import { cleanObject, useMount, useDebounce } from "utils/index";
 const url = process.env.REACT_APP_API_URL;
 
 export const ProjectList = () => {

@@ -1,25 +1,14 @@
-const url = process.env.REACT_APP_API_URL;
+import { useAuth } from "content/auth-context";
+export const Register = () => {
+  const { user, register } = useAuth();
 
-export const Login = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    const login = (params: { username: string; password: string }) => {
-      fetch(`${url}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(params),
-      }).then(async (res) => {
-        if (res.status === 200) {
-        }
-      });
-    };
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement)
       .value;
     const password = (event.currentTarget.elements[1] as HTMLInputElement)
       .value;
-    login({ username, password });
+    register({ username, password });
     // console.log(event.currentTarget.elements[0].value);
   };
 
@@ -33,7 +22,7 @@ export const Login = () => {
         <label htmlFor="password">密码</label>
         <input type="password" id="password" />
       </div>
-      <button type="submit">提交</button>
+      <button type="submit">注册</button>
     </form>
   );
 };
