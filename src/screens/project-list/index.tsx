@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import qs from "qs";
 import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { cleanObject, useMount, useDebounce } from "utils/index";
-const url = process.env.REACT_APP_API_URL;
+import { useHttp } from "utils/http";
+import { useAuth } from "content/auth-context";
 
 export const ProjectList = () => {
   const [params, setParams] = useState({
@@ -14,27 +14,28 @@ export const ProjectList = () => {
   const [userList, setUserList] = useState([]);
   const [projectsList, setProjectsList] = useState([]);
   const debounceParams = useDebounce(params, 500);
+  const { logout } = useAuth();
+  const client = useHttp();
 
   useMount(() => {
-    fetch(`${url}/users`).then(async (res) => {
-      if (res.status === 200) {
-        setUserList(await res.json());
-      }
-    });
+    client("users").then(setUserList);
   });
 
   useEffect(() => {
     const result = cleanObject(debounceParams);
     console.error("调用接口查询", debounceParams);
-    fetch(`${url}/projects?${qs.stringify(result)}`).then(async (res) => {
-      if (res.status === 200) {
-        setProjectsList(await res.json());
-      }
-    });
+    client("projects", { data: result }).then(setProjectsList);
   }, [debounceParams]);
 
   return (
     <div>
+      <button
+        onClick={() => {
+          logout();
+        }}
+      >
+        登出
+      </button>
       <SearchPanel params={params} setParams={setParams} list={userList} />
       <List projectsList={projectsList} userList={userList} />
     </div>
