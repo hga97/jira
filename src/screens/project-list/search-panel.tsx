@@ -1,4 +1,5 @@
 import { User } from "./list";
+import { Form, Input, Select } from "antd";
 
 interface IFParams {
   name: string;
@@ -13,10 +14,9 @@ interface IFSearchPanel {
 
 export const SearchPanel = ({ params, setParams, list }: IFSearchPanel) => {
   return (
-    <form action="">
-      <div>
-        <input
-          type="text"
+    <Form action="">
+      <Form.Item>
+        <Input
           value={params.name}
           onChange={(e) => {
             setParams({
@@ -25,23 +25,25 @@ export const SearchPanel = ({ params, setParams, list }: IFSearchPanel) => {
             });
           }}
         />
-        <select
+      </Form.Item>
+      <Form.Item>
+        <Select
           value={params.personId}
-          onChange={(e) => {
+          onChange={(personId) => {
             setParams({
               ...params,
-              personId: e.target.value,
+              personId,
             });
           }}
         >
-          <option value={""}>负责人</option>
+          <Select.Option value={""}>负责人</Select.Option>
           {list.map((item) => (
-            <option value={item.id} key={item.id}>
+            <Select.Option value={item.id} key={item.id}>
               {item.name}
-            </option>
+            </Select.Option>
           ))}
-        </select>
-      </div>
-    </form>
+        </Select>
+      </Form.Item>
+    </Form>
   );
 };

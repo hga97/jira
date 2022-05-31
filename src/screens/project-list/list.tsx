@@ -1,3 +1,5 @@
+import { Table } from "antd";
+
 interface IFProject {
   id: number;
   name: string;
@@ -19,17 +21,21 @@ interface IFList {
 
 export const List = ({ projectsList, userList }: IFList) => {
   return (
-    <table>
-      <tr>
-        <th>名称</th>
-        <th>负责人</th>
-      </tr>
-      {projectsList.map((item) => (
-        <tr key={item.id}>
-          <td>{item.name}</td>
-          <td>{userList.find((user) => user.id === item.personId)?.name}</td>
-        </tr>
-      ))}
-    </table>
+    <Table
+      columns={[
+        {
+          title: "名称",
+          dataIndex: "name",
+        },
+        {
+          title: "负责人",
+          dataIndex: "personId",
+          render(personId) {
+            return userList.find((user) => user.id === personId)?.name;
+          },
+        },
+      ]}
+      dataSource={projectsList}
+    />
   );
 };
