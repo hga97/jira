@@ -6,7 +6,7 @@ export const isFalsy = (value: unknown) => {
 };
 
 export const cleanObject = (object: Record<string, unknown>) => {
-  // 传进来的obj有可能是想保留的值
+  // 传进来的obj有可能是想保留的值1
   // 故不要随意更改对象、数组的值
   // 返回一个新的给他们，新旧值都不影响
   const result = { ...object };
