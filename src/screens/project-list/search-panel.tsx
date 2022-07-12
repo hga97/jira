@@ -14,7 +14,7 @@ interface IFSearchPanel {
 
 export const SearchPanel = ({ params, setParams, list }: IFSearchPanel) => {
   return (
-    <Form action="">
+    <Form style={{ marginBottom: "2rem" }} layout={"inline"}>
       <Form.Item>
         <Input
           value={params.name}

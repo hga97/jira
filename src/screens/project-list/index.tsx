@@ -3,7 +3,6 @@ import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { cleanObject, useMount, useDebounce } from "utils/index";
 import { useHttp } from "utils/http";
-import { useAuth } from "content/auth-context";
 
 export const ProjectList = () => {
   const [params, setParams] = useState({
@@ -14,7 +13,6 @@ export const ProjectList = () => {
   const [userList, setUserList] = useState([]);
   const [projectsList, setProjectsList] = useState([]);
   const debounceParams = useDebounce(params, 500);
-  const { logout } = useAuth();
   const client = useHttp();
 
   useMount(() => {
@@ -29,13 +27,6 @@ export const ProjectList = () => {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          logout();
-        }}
-      >
-        登出
-      </button>
       <SearchPanel params={params} setParams={setParams} list={userList} />
       <List projectsList={projectsList} userList={userList} />
     </div>
