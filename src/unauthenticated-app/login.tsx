@@ -1,5 +1,6 @@
 import { useAuth } from "content/auth-context";
 import { Form, Input, Button } from "antd";
+import { LongButton } from "unauthenticated-app";
 
 export const Login = () => {
   const { login } = useAuth();
@@ -11,23 +12,21 @@ export const Login = () => {
   return (
     <Form onFinish={handleSubmit}>
       <Form.Item
-        label="用户名"
         name="username"
         rules={[{ required: true, message: "请输入用户名" }]}
       >
-        <Input />
+        <Input placeholder={"用户名"} type="text" />
       </Form.Item>
       <Form.Item
-        label="密码"
         name="password"
         rules={[{ required: true, message: "请输入密码" }]}
       >
-        <Input.Password />
+        <Input placeholder={"密码"} type="password" />
       </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+      <Form.Item>
+        <LongButton type="primary" htmlType="submit">
           登录
-        </Button>
+        </LongButton>
       </Form.Item>
     </Form>
   );
