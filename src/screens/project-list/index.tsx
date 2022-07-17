@@ -3,6 +3,7 @@ import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { cleanObject, useMount, useDebounce } from "utils/index";
 import { useHttp } from "utils/http";
+import styled from "@emotion/styled";
 
 export const ProjectList = () => {
   const [params, setParams] = useState({
@@ -26,9 +27,14 @@ export const ProjectList = () => {
   }, [debounceParams]);
 
   return (
-    <div>
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel params={params} setParams={setParams} list={userList} />
       <List projectsList={projectsList} userList={userList} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;

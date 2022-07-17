@@ -12,7 +12,7 @@ export const Row = styled.div<{
   > * {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
-    margin-left: ${(props) =>
+    margin-right: ${(props) =>
       typeof props.grap === "number"
         ? props.grap + "rem"
         : props.grap

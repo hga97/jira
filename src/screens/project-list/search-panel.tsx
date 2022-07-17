@@ -1,22 +1,26 @@
-import { User } from "./list";
 import { Form, Input, Select } from "antd";
 
-interface IFParams {
+export interface User {
+  id: number;
   name: string;
-  personId: string;
+  token: string;
 }
 
-interface IFSearchPanel {
-  params: IFParams;
-  setParams: (params: IFParams) => void;
+interface SearchPanelProps {
+  params: {
+    name: string;
+    personId: string;
+  };
+  setParams: (params: SearchPanelProps["params"]) => void;
   list: User[];
 }
 
-export const SearchPanel = ({ params, setParams, list }: IFSearchPanel) => {
+export const SearchPanel = ({ params, setParams, list }: SearchPanelProps) => {
   return (
     <Form style={{ marginBottom: "2rem" }} layout={"inline"}>
       <Form.Item>
         <Input
+          placeholder="项目名"
           value={params.name}
           onChange={(e) => {
             setParams({
