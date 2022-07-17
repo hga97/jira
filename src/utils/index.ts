@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
 // ts类型推断函数返回值为boolean
-export const isFalsy = (value: unknown) => {
-  return value === 0 ? false : !value;
-};
+export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
+
+export const isVoid = (value: unknown) =>
+  value === undefined || value === null || value === "";
 
 export const cleanObject = (object: Record<string, unknown>) => {
   // 传进来的obj有可能是想保留的值1
@@ -11,7 +12,7 @@ export const cleanObject = (object: Record<string, unknown>) => {
   // 返回一个新的给他们，新旧值都不影响
   const result = { ...object };
   for (const key in result) {
-    if (isFalsy(result[key])) {
+    if (isVoid(result[key])) {
       delete result[key];
     }
   }
@@ -21,6 +22,7 @@ export const cleanObject = (object: Record<string, unknown>) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

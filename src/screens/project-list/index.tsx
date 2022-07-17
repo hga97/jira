@@ -24,6 +24,7 @@ export const ProjectList = () => {
     const result = cleanObject(debounceParams);
     console.error("调用接口查询", debounceParams);
     client("projects", { data: result }).then(setProjectsList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceParams]);
 
   return (
