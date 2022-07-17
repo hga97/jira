@@ -1,14 +1,15 @@
 import { ProjectList } from "screens/project-list";
 import { useAuth } from "context/auth-context";
 import styled from "@emotion/styled";
+import { Row } from "components/lib";
 
 export const Authenticated = () => {
   const { logout } = useAuth();
 
   return (
     <Container>
-      <Header>
-        <HeaderLeft>
+      <Header between={true}>
+        <HeaderLeft grap={true}>
           <h3>Logo</h3>
           <h3>项目</h3>
           <h3>用户</h3>
@@ -30,16 +31,9 @@ export const Authenticated = () => {
   );
 };
 
-const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+const Header = styled(Row)``;
 
-const HeaderLeft = styled.div`
-  display: flex;
-  align-items: center;
-`;
+const HeaderLeft = styled(Row)``;
 
 const HeaderRight = styled.div``;
 
