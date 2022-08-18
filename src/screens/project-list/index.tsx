@@ -31,7 +31,7 @@ export const ProjectList = () => {
     <Container>
       <h1>项目列表</h1>
       <SearchPanel params={params} setParams={setParams} list={userList} />
-      <List projectsList={projectsList} userList={userList} />
+      <List dataSource={projectsList} userList={userList} />
     </Container>
   );
 };
