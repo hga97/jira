@@ -6,7 +6,7 @@ import { TableProps } from "antd/es/table";
 export interface Project {
   id: number;
   name: string;
-  personId: number;
+  personId: string;
   organization: string;
   created: number;
 }
