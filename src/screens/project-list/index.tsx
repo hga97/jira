@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { List, Project } from "./list";
+import { useState } from "react";
+import { List } from "./list";
 import { SearchPanel } from "./search-panel";
-import { cleanObject, useMount, useDebounce } from "utils/index";
+import { useMount, useDebounce } from "utils/index";
 import { useHttp } from "utils/http";
 import styled from "@emotion/styled";
-import { useAsync } from "utils/use-async";
 import { Typography } from "antd";
+import { useProjects } from "utils/project";
 
 export const ProjectList = () => {
   const [params, setParams] = useState({
@@ -15,25 +15,18 @@ export const ProjectList = () => {
 
   const [userList, setUserList] = useState([]);
   const debounceParams = useDebounce(params, 500);
-  const client = useHttp();
   const {
-    run,
-    isLoding,
     isError,
+    isLoading,
     error,
     data: projectsList,
-  } = useAsync<Project[]>();
+  } = useProjects(debounceParams);
+
+  const client = useHttp();
 
   useMount(() => {
     client("users").then(setUserList);
   });
-
-  useEffect(() => {
-    const result = cleanObject(debounceParams);
-    console.error("调用接口查询", debounceParams);
-    run(client("projects", { data: result }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounceParams]);
 
   return (
     <Container>
@@ -43,7 +36,7 @@ export const ProjectList = () => {
         <Typography.Text type={"danger"}>{error?.message}</Typography.Text>
       ) : null}
       <List
-        loading={isLoding}
+        loading={isLoading}
         dataSource={projectsList || []}
         userList={userList}
       />
