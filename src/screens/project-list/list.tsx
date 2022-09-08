@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { User } from "./search-panel";
 import { TableProps } from "antd/es/table";
 
-interface Project {
+export interface Project {
   id: number;
   name: string;
   personId: number;
@@ -15,6 +15,7 @@ interface ListProps extends TableProps<Project> {
   userList: User[];
 }
 
+// type propsType = Omit<ListProps, 'userList'>
 export const List = ({ userList, ...props }: ListProps) => {
   return (
     <Table
