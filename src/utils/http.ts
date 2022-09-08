@@ -34,10 +34,11 @@ export const http = (
       window.location.reload();
       return Promise.reject({ message: "请重新登录" });
     }
+    const data = await response.json();
     if (response.ok) {
-      return await response.json();
+      return data;
     } else {
-      return Promise.reject(response);
+      return Promise.reject(data);
     }
   });
 };
