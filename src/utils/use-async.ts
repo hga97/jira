@@ -62,7 +62,7 @@ export const useAsync = <D>(
   };
 
   return {
-    isIdel: state.stat === "idle",
+    isIdle: state.stat === "idle",
     isLoading: state.stat === "loading",
     isError: state.stat === "error",
     isSuccess: state.stat === "success",
