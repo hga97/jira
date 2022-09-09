@@ -1,9 +1,11 @@
 import { useAuth } from "context/auth-context";
 import { Form, Input } from "antd";
 import { LongButton } from "unauthenticated-app";
+import { useAsync } from "utils/use-async";
 
 export const Register = ({ onError }: { onError: (error: Error) => void }) => {
   const { register } = useAuth();
+  const { run, isLoading } = useAsync(undefined, { throwOnError: true });
 
   const handleSubmit = async ({
     cpassword,
@@ -18,7 +20,7 @@ export const Register = ({ onError }: { onError: (error: Error) => void }) => {
       return;
     }
     try {
-      await register(value);
+      await run(register(value));
     } catch (e) {
       onError(e as Error);
     }
@@ -45,7 +47,7 @@ export const Register = ({ onError }: { onError: (error: Error) => void }) => {
         <Input placeholder={"确认密码"} type="password" />
       </Form.Item>
       <Form.Item>
-        <LongButton type="primary" htmlType="submit">
+        <LongButton loading={isLoading} type="primary" htmlType="submit">
           注册
         </LongButton>
       </Form.Item>
