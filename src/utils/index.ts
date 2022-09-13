@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // ts类型推断函数返回值为boolean
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
@@ -73,19 +73,21 @@ export const useDocumentTitle = (
   title: string,
   keepOnUnmount: boolean = true
 ) => {
-  const oldTitle = document.title;
+  // ref 对象在组件的整个生命周期内持续存在
+  const oldTitle = useRef(document.title).current;
 
   useEffect(() => {
     document.title = title;
+    console.log(title, "title");
   }, [title]);
 
   useEffect(() => {
     return () => {
       if (!keepOnUnmount) {
         //闭包，获取到的是第一次进来的值
-        // 如果指定依赖的话，获取到的就是新的值
+        // 如果指定依赖的话，获取到的就是新的值, 而且没指定依赖会告警
         document.title = oldTitle;
       }
     };
-  }, []);
+  }, [keepOnUnmount, oldTitle]);
 };
