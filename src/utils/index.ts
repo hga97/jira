@@ -68,3 +68,24 @@ export const useArray = <T>(initialArray: T[]) => {
 
   return { value, setValue, add, clear, removeIndex };
 };
+
+export const useDocumentTitle = (
+  title: string,
+  keepOnUnmount: boolean = true
+) => {
+  const oldTitle = document.title;
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  useEffect(() => {
+    return () => {
+      if (!keepOnUnmount) {
+        //闭包，获取到的是第一次进来的值
+        // 如果指定依赖的话，获取到的就是新的值
+        document.title = oldTitle;
+      }
+    };
+  }, []);
+};
