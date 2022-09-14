@@ -1,43 +1,68 @@
-import { ProjectList } from "screens/project-list";
+import { ProjectListScreen } from "screens/project-list";
 import { useAuth } from "context/auth-context";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Dropdown, Menu, Button } from "antd";
+import { Routes, Route } from "react-router";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ProjectScreen } from "screens/project";
+
+// react: 包含了 Web 和 Mobile 通用的核心部分
+// react-dom：负责 Dom 操作的分到 ReactDOM
+// react-native：负责 Mobile 的包含在 ReactNative
+
+// react-router: 路由的核心功能
+// router-router-dom: 加入了在浏览器运行环境下的一些功能
+// react-router-native：类似react-router-dom，加入了react-native运行环境下的一些功能。
 
 export const Authenticated = () => {
+  return (
+    <Container>
+      <PageHeader />
+      <Main>
+        <Router>
+          <Routes>
+            <Route path={"/projects"} element={<ProjectListScreen />} />
+            <Route
+              path={"/projects/:projectId/*"}
+              element={<ProjectScreen />}
+            />
+          </Routes>
+        </Router>
+      </Main>
+    </Container>
+  );
+};
+
+const PageHeader = () => {
   const { logout, user } = useAuth();
 
   return (
-    <Container>
-      <Header between={true}>
-        <HeaderLeft grap={true}>
-          <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
-          <h3>项目</h3>
-          <h3>用户</h3>
-        </HeaderLeft>
-        <HeaderRight>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key={"logout"}>
-                  <Button type={"link"} onClick={logout}>
-                    登出
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <Button type={"link"} onClick={(e) => e.preventDefault()}>
-              Hi, {user?.name}
-            </Button>
-          </Dropdown>
-        </HeaderRight>
-      </Header>
-      <Main>
-        <ProjectList />
-      </Main>
-    </Container>
+    <Header between={true}>
+      <HeaderLeft grap={true}>
+        <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        <h3>项目</h3>
+        <h3>用户</h3>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key={"logout"}>
+                <Button type={"link"} onClick={logout}>
+                  登出
+                </Button>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <Button type={"link"} onClick={(e) => e.preventDefault()}>
+            Hi, {user?.name}
+          </Button>
+        </Dropdown>
+      </HeaderRight>
+    </Header>
   );
 };
 
