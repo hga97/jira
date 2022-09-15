@@ -91,3 +91,7 @@ export const useDocumentTitle = (
     };
   }, [keepOnUnmount, oldTitle]);
 };
+
+// window.location.href 返回当前页面的 href (URL)
+// window.location.origin 表示的是当前页面的URL的源。
+export const resetRoute = () => (window.location.href = window.location.origin);

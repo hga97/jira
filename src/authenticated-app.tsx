@@ -4,9 +4,10 @@ import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { Dropdown, Menu, Button } from "antd";
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ProjectScreen } from "screens/project";
+import { resetRoute } from "utils";
 
 // react: 包含了 Web 和 Mobile 通用的核心部分
 // react-dom：负责 Dom 操作的分到 ReactDOM
@@ -28,6 +29,7 @@ export const Authenticated = () => {
               path={"/projects/:projectId/*"}
               element={<ProjectScreen />}
             />
+            <Route index element={<Navigate to="/projects" />} />
           </Routes>
         </Router>
       </Main>
@@ -41,7 +43,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft grap={true}>
-        <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        <Button type={"link"} onClick={resetRoute}>
+          <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        </Button>
         <h3>项目</h3>
         <h3>用户</h3>
       </HeaderLeft>
