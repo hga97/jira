@@ -17,7 +17,7 @@ import { resetRoute } from "utils";
 // router-router-dom: 加入了在浏览器运行环境下的一些功能
 // react-router-native：类似react-router-dom，加入了react-native运行环境下的一些功能。
 
-// TODO: 路由学习，Navigate
+// TODO: 路由学习，Navigate 专题
 export const Authenticated = () => {
   return (
     <Container>

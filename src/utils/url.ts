@@ -3,7 +3,6 @@ import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
 import { cleanObject } from "utils";
 
 // TODO: MDN URLSearchParams
-// TODO: tuple as const key in string
 // TODO: useMemo
 // TODO: iterator: https://codesandbox.io/s/upbeat-wood-bum3j?file=/src/index.js
 export const useUrlQueryParam = <K extends string>(keys: K[]) => {
@@ -27,3 +26,41 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
     },
   ] as const;
 };
+
+// 第一
+// const a = <K>(key: K[]) => {
+//   console.log(key);
+// };
+// // const a: <string | number>(key: (string | number)[]) => void
+// a(["asd", 1]);
+
+// 第二
+// const a = <K extends string>(key: K[]) => {
+//   console.log(key);
+// };
+// const a: <"asd" | "asdasd">(key: ("asd" | "asdasd")[]) => void
+// a(["asd", 'asdasd']);
+
+// 第三
+// type a = {
+//   num: number;
+//   str: string;
+// };
+// type b = keyof a
+// const a: b = 'str'
+
+// 第四
+// const a: (string | number)[]
+// const a: readonly ["11", 1]
+// const a = ['11', 1] as const
+
+// 第五
+// type Person = 'name' | 'age'
+
+// type Tname = {
+//   name: string;
+//   age: string;
+// }
+// type Tname = {
+//     [key in Person]:string;
+// }
