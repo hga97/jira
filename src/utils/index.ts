@@ -44,7 +44,6 @@ export const useDebounce = <V>(value: V, delay: number) => {
   const [debounceValue, setDebounceValue] = useState(value);
   useEffect(() => {
     const time = setTimeout(() => {
-      console.error("debounce---");
       setDebounceValue(value);
     }, delay);
 
@@ -78,7 +77,6 @@ export const useDocumentTitle = (
 
   useEffect(() => {
     document.title = title;
-    console.log(title, "title");
   }, [title]);
 
   useEffect(() => {
