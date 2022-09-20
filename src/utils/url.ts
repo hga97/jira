@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
 import { cleanObject } from "utils";
 
-// TODO: MDN URLSearchParams
+// TODO: MDN URLSearchParams get获取到的值是字符串
 // TODO: useMemo
 // TODO: iterator: https://codesandbox.io/s/upbeat-wood-bum3j?file=/src/index.js
 export const useUrlQueryParam = <K extends string>(keys: K[]) => {

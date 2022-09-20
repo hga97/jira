@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
-import { useUrlQueryParam } from "utils/url";
+import { useProjectsSearchParams } from "./util";
 
 export const ProjectListScreen = () => {
   // different objects that are equal by value
@@ -13,29 +13,23 @@ export const ProjectListScreen = () => {
   // 基本类型，可以放到依赖里；组件状态，可以放到依赖里；
   // TODO：https://codesandbox.io/s/keen-wave-tlz9s?file=/src/App.js
 
-  const [params, setParams] = useUrlQueryParam(["name", "personId"]);
-  const debounceParams = useDebounce(params, 500);
+  useDocumentTitle("项目列表", false);
+
+  const [params, setParams] = useProjectsSearchParams();
 
   const {
-    isError,
     isLoading,
     error,
     data: projectsList,
-  } = useProjects(debounceParams);
+  } = useProjects(useDebounce(params, 500));
 
   const { data: userList } = useUsers();
-
-  useDocumentTitle("项目列表", false);
 
   return (
     <Container>
       <h1>项目列表</h1>
-      <SearchPanel
-        params={params}
-        setParams={setParams}
-        list={userList || []}
-      />
-      {isError ? (
+      <SearchPanel params={params} setParams={setParams} />
+      {error ? (
         <Typography.Text type={"danger"}>{error?.message}</Typography.Text>
       ) : null}
       <List
