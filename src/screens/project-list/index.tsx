@@ -21,6 +21,7 @@ export const ProjectListScreen = () => {
     isLoading,
     error,
     data: projectsList,
+    retry,
   } = useProjects(useDebounce(params, 500));
 
   const { data: userList } = useUsers();
@@ -33,6 +34,7 @@ export const ProjectListScreen = () => {
         <Typography.Text type={"danger"}>{error?.message}</Typography.Text>
       ) : null}
       <List
+        refresh={retry}
         loading={isLoading}
         dataSource={projectsList || []}
         userList={userList || []}

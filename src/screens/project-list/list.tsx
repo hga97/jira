@@ -17,12 +17,15 @@ export interface Project {
 
 interface ListProps extends TableProps<Project> {
   userList: User[];
+  refresh?: () => void;
 }
 
 // type propsType = Omit<ListProps, 'userList'>
 export const List = ({ userList, ...props }: ListProps) => {
   const { mutate } = useEditProject();
-  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
+  // TODO: 函数柯里化
+  const pinProject = (id: number) => (pin: boolean) =>
+    mutate({ id, pin }).then(props.refresh);
 
   return (
     <Table
