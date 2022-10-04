@@ -93,3 +93,17 @@ export const useDocumentTitle = (
 // window.location.href 返回当前页面的 href (URL)
 // window.location.origin 表示的是当前页面的URL的源。
 export const resetRoute = () => (window.location.href = window.location.origin);
+
+export const useMountedRef = () => {
+  const mountedRef = useRef(false);
+
+  // 每次渲染都会运行useEffect
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  });
+
+  return mountedRef;
+};
