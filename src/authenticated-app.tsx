@@ -8,6 +8,9 @@ import { Routes, Route, Navigate } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ProjectScreen } from "screens/project";
 import { resetRoute } from "utils";
+import { ProjectModal } from "screens/project-list/project-modal";
+import { useState } from "react";
+import { ProjectPopover } from "components/project-popover";
 
 // react: 包含了 Web 和 Mobile 通用的核心部分
 // react-dom：负责 Dom 操作的分到 ReactDOM
@@ -19,6 +22,7 @@ import { resetRoute } from "utils";
 
 // TODO: 路由学习，Navigate 专题
 export const Authenticated = () => {
+  const [projectModalOpen, setProjectModalOpen] = useState(false);
   return (
     <Container>
       <PageHeader />
@@ -34,6 +38,12 @@ export const Authenticated = () => {
           </Routes>
         </Router>
       </Main>
+      <ProjectModal
+        projectModalOpen={projectModalOpen}
+        onClose={() => {
+          setProjectModalOpen(false);
+        }}
+      />
     </Container>
   );
 };
@@ -42,11 +52,11 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft grap={true}>
-        <Button type={"link"} onClick={resetRoute}>
+        <Button style={{ padding: 0 }} type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
         </Button>
-        <h3>项目</h3>
-        <h3>用户</h3>
+        <ProjectPopover />
+        <span>用户</span>
       </HeaderLeft>
       <HeaderRight>
         <User />
