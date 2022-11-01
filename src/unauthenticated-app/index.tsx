@@ -72,6 +72,8 @@ const ShodowCard = styled(Card)`
   text-align: center;
 `;
 
+// temporal dead zoon（暂时性死区）
+// 先声明，还没调用
 const Container = styled.div`
   display: flex;
   flex-direction: column;
