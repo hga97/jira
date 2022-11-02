@@ -22,6 +22,9 @@ import { ProjectPopover } from "components/project-popover";
 
 // TODO: 路由学习，Navigate 专题
 export const Authenticated = () => {
+  // 状态提升导致的问题：
+  // 1、prop drilling，嵌套层级多，prop一层一层往下传递
+  // 2、耦合，setProjectModalOpen更改，下面引用的组件全部要改
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   return (
     <Container>
