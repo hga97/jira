@@ -13,7 +13,7 @@ export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
   // 循环更新的原因: 将非状态，非基本类型作为引用对象，重新渲染会被重新定义。
   // React把前一次渲染时的数组和这次渲染的数组中的元素进行对比，发现不一致，React 就会再次调用 effect，导致无限调用。
   // 要点：非状态，非基本类型是不能存放到依赖里。
-  // 解决：useMemo（对象或数组）、useCallback（函数）
+  // 解决：useMemo（对象或数组）、useCallback（函数） https://react.docschina.org/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often
   // TODO：https://codesandbox.io/s/keen-wave-tlz9s?file=/src/App.js
 
   useDocumentTitle("项目列表", false);
