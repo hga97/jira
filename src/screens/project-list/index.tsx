@@ -10,8 +10,10 @@ import { Row } from "components/lib";
 
 export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
   // different objects that are equal by value
-  // 循环更新的原因: 将数组作为引用对象，react对比不是同一个对象，导致无限setData
-  // 基本类型，可以放到依赖里；组件状态，可以放到依赖里；
+  // 循环更新的原因: 将非状态，非基本类型作为引用对象，重新渲染会被重新定义。
+  // React把前一次渲染时的数组和这次渲染的数组中的元素进行对比，发现不一致，React 就会再次调用 effect，导致无限调用。
+  // 要点：非状态，非基本类型是不能存放到依赖里。
+  // 解决：useMemo（对象或数组）、useCallback（函数）
   // TODO：https://codesandbox.io/s/keen-wave-tlz9s?file=/src/App.js
 
   useDocumentTitle("项目列表", false);
