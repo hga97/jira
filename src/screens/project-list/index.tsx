@@ -6,9 +6,11 @@ import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectsSearchParams } from "./util";
-import { Row } from "components/lib";
+import { ButtonNoPadding, Row } from "components/lib";
+import { useDispatch } from "react-redux";
+import { projectListActions } from "./project-list.slice";
 
-export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
+export const ProjectListScreen = () => {
   // different objects that are equal by value
   // 循环更新的原因: 将非状态，非基本类型作为引用对象，重新渲染会被重新定义。
   // React把前一次渲染时的数组和这次渲染的数组中的元素进行对比，发现不一致，React 就会再次调用 effect，导致无限调用。
@@ -29,19 +31,26 @@ export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
   } = useProjects(useDebounce(params, 500));
 
   const { data: userList } = useUsers();
+  const dispatch = useDispatch();
 
   return (
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        {props.projectButton}
+        <ButtonNoPadding
+          onClick={() => {
+            dispatch(projectListActions.openProjectModal());
+          }}
+          type={"link"}
+        >
+          创建项目
+        </ButtonNoPadding>
       </Row>
       <SearchPanel params={params} setParams={setParams} />
       {error ? (
         <Typography.Text type={"danger"}>{error?.message}</Typography.Text>
       ) : null}
       <List
-        projectButton={props.projectButton}
         refresh={retry}
         loading={isLoading}
         dataSource={projectsList || []}
