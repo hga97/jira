@@ -19,15 +19,13 @@ export interface Project {
 
 interface ListProps extends TableProps<Project> {
   userList: User[];
-  refresh?: () => void;
 }
 
 // type propsType = Omit<ListProps, 'userList'>
 export const List = ({ userList, ...props }: ListProps) => {
   const { mutate } = useEditProject();
   // TODO: 函数柯里化
-  const pinProject = (id: number) => (pin: boolean) =>
-    mutate({ id, pin }).then(props.refresh);
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
   const { open } = useProjectModal();
 
   return (

@@ -2,11 +2,10 @@ import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { useDebounce, useDocumentTitle } from "utils/index";
 import styled from "@emotion/styled";
-import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectModal, useProjectsSearchParams } from "./util";
-import { ButtonNoPadding, Row } from "components/lib";
+import { ButtonNoPadding, ErrorBox, Row } from "components/lib";
 
 export const ProjectListScreen = () => {
   // different objects that are equal by value
@@ -25,7 +24,6 @@ export const ProjectListScreen = () => {
     isLoading,
     error,
     data: projectsList,
-    retry,
   } = useProjects(useDebounce(params, 500));
 
   const { data: userList } = useUsers();
@@ -41,11 +39,8 @@ export const ProjectListScreen = () => {
         </ButtonNoPadding>
       </Row>
       <SearchPanel params={params} setParams={setParams} />
-      {error ? (
-        <Typography.Text type={"danger"}>{error?.message}</Typography.Text>
-      ) : null}
+      <ErrorBox error={error} />
       <List
-        refresh={retry}
         loading={isLoading}
         dataSource={projectsList || []}
         userList={userList || []}
