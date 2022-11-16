@@ -26,7 +26,7 @@ export const List = ({ userList, ...props }: ListProps) => {
   const { mutate } = useEditProject();
   // TODO: 函数柯里化
   const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
-  const { open } = useProjectModal();
+  const { startEdit } = useProjectModal();
 
   return (
     <Table
@@ -84,7 +84,12 @@ export const List = ({ userList, ...props }: ListProps) => {
               <Dropdown
                 overlay={
                   <Menu>
-                    <Menu.Item key={"edit"} onClick={open}>
+                    <Menu.Item
+                      key={"edit"}
+                      onClick={() => {
+                        startEdit(project.id);
+                      }}
+                    >
                       编辑
                     </Menu.Item>
                     <Menu.Item key={"delete"}>删除</Menu.Item>

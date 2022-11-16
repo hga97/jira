@@ -26,6 +26,7 @@ export const useProjectModal = () => {
     "editingProjectId",
   ]); // 编辑
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setUrlParams] = useSearchParams();
 
   const { data: editingProject, isLoading } = useProject(
@@ -40,7 +41,7 @@ export const useProjectModal = () => {
     setEditingProjectId({ editingProjectId: id });
 
   return {
-    projectCreate: projectCreate === "true" || Boolean(editingProjectId),
+    projectModalOpen: projectCreate === "true" || Boolean(editingProjectId),
     open,
     close,
     startEdit,
