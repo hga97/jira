@@ -2,6 +2,7 @@ import { Project } from "screens/project-list/list";
 import { cleanObject } from "utils";
 import { useHttp } from "./http";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useProjectsSearchParams } from "screens/project-list/util";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
@@ -14,6 +15,10 @@ export const useProjects = (param?: Partial<Project>) => {
 export const useEditProject = () => {
   const client = useHttp();
   const queryClient = useQueryClient();
+
+  const [searchParams] = useProjectsSearchParams();
+  const queryKey = ["projects", searchParams];
+
   return useMutation(
     (params: Partial<Project>) =>
       client(`projects/${params.id}`, {
@@ -21,7 +26,22 @@ export const useEditProject = () => {
         data: params,
       }),
     {
-      onSuccess: () => queryClient.invalidateQueries("projects"),
+      onSuccess: () => queryClient.invalidateQueries(queryKey),
+      async onMutate(target) {
+        // 乐观更新：先响应用户操作，然后再根据服务器的结果，是否返回原先状态
+        const previousItems = queryClient.getQueryData(queryKey);
+        queryClient.setQueryData(queryKey, (old?: Project[]) => {
+          return (
+            old?.map((project) =>
+              project.id === target.id ? { ...project, ...target } : project
+            ) || []
+          );
+        });
+        return { previousItems };
+      },
+      onError(error, newItem, context: any) {
+        queryClient.setQueryData(queryKey, context?.previousItems);
+      },
     }
   );
 };
