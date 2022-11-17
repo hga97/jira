@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Spin, Typography, Button } from "antd";
+import { DevTools } from "jira-dev-tool";
 
 export const Row = styled.div<{
   grap?: number | boolean;
@@ -37,6 +38,7 @@ export const FullPageLoading = () => (
 
 export const FullPageErrorFallBack = ({ error }: { error: Error | null }) => (
   <FullPage>
+    <DevTools />
     <ErrorBox error={error} />
   </FullPage>
 );
