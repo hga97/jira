@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { useProject } from "utils/project";
-import { useUrlQueryParam } from "utils/url";
-import { useSearchParams } from "react-router-dom";
+import { useSetUrlSearchParam, useUrlQueryParam } from "utils/url";
 
 export const useProjectsSearchParams = () => {
   const [params, setParams] = useUrlQueryParam(["name", "personId"]);
@@ -31,8 +30,7 @@ export const useProjectModal = () => {
     "editingProjectId",
   ]); // 编辑
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setUrlParams] = useSearchParams();
+  const setUrlParams = useSetUrlSearchParam();
 
   const { data: editingProject, isLoading } = useProject(
     Number(editingProjectId)
