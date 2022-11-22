@@ -68,7 +68,7 @@ export const Authenticated = () => {
 const PageHeader = () => {
   return (
     <Header between={true}>
-      <HeaderLeft grap={true}>
+      <HeaderLeft gap={true}>
         <ButtonNoPadding type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
         </ButtonNoPadding>

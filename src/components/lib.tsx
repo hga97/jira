@@ -3,7 +3,7 @@ import { Spin, Typography, Button } from "antd";
 import { DevTools } from "jira-dev-tool";
 
 export const Row = styled.div<{
-  grap?: number | boolean;
+  gap?: number | boolean;
   between?: boolean;
   marginBottom?: number;
 }>`
@@ -15,9 +15,9 @@ export const Row = styled.div<{
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     margin-right: ${(props) =>
-      typeof props.grap === "number"
-        ? props.grap + "rem"
-        : props.grap
+      typeof props.gap === "number"
+        ? props.gap + "rem"
+        : props.gap
         ? "2rem"
         : undefined};
   }
