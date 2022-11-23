@@ -113,7 +113,10 @@ const HeaderLeft = styled(Row)``;
 
 const HeaderRight = styled.div``;
 
-const Main = styled.main``;
+const Main = styled.main`
+  display: flex;
+  overflow: hidden;
+`;
 
 const Container = styled.div`
   display: grid;

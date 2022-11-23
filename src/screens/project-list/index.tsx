@@ -1,11 +1,15 @@
 import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { useDebounce, useDocumentTitle } from "utils/index";
-import styled from "@emotion/styled";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectModal, useProjectsSearchParams } from "./util";
-import { ButtonNoPadding, ErrorBox, Row } from "components/lib";
+import {
+  ButtonNoPadding,
+  ErrorBox,
+  Row,
+  ScreenContainer,
+} from "components/lib";
 
 export const ProjectListScreen = () => {
   // different objects that are equal by value
@@ -31,7 +35,7 @@ export const ProjectListScreen = () => {
   const { open } = useProjectModal();
 
   return (
-    <Container>
+    <ScreenContainer>
       <Row between={true}>
         <h1>项目列表</h1>
         <ButtonNoPadding onClick={open} type={"link"}>
@@ -45,12 +49,8 @@ export const ProjectListScreen = () => {
         dataSource={projectsList || []}
         userList={userList || []}
       />
-    </Container>
+    </ScreenContainer>
   );
 };
 
 ProjectListScreen.whyDidYouRender = false;
-
-const Container = styled.div`
-  padding: 3.2rem;
-`;
