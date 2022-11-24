@@ -37,7 +37,12 @@ export const ProjectModal = () => {
   }, [editingProject, form]);
 
   return (
-    <Drawer onClose={closeModal} visible={projectModalOpen} width={"100%"}>
+    <Drawer
+      forceRender={true}
+      onClose={closeModal}
+      visible={projectModalOpen}
+      width={"100%"}
+    >
       <Container>
         {isLoading ? (
           <Spin size={"large"} />
